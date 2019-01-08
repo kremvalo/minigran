@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet,Text, View, Button, AsyncStorage } from 'react-native'
+import { View, Button } from 'react-native'
 import {
     TextStyled, 
     TextInstrucciones,
@@ -39,13 +39,10 @@ export class Search extends Component {
      const resp = this.fetchFeed(this.state.data)
      resp.then(data => {
       // this.setState({  idHas: '17841562822081458'})
-      this.setState({  idHas: data[0].id})
-      var array = {key:1,id: `${data[0].id}`, hashtag: this.state.data};
-      AsyncStorage.setItem('@resources:idHas',JSON.stringify(array)).catch((error)=> console.log(error))
+        this.setState({  idHas: data[0].id})
+        // var array = {key:1,id: `${data[0].id}`, hashtag: this.state.data};
+        // AsyncStorage.setItem('@resources:idHas',JSON.stringify(array)).catch((error)=> console.log(error))
     }).catch((error)=> console.log(error));
-     
-      // AsyncStorage.setItem('@resourcesk:idHas','17841562822081458').catch((error)=> console.log(error))
-   
   }
 
   render() {
@@ -78,7 +75,7 @@ export class Search extends Component {
             </ContainerForm>
             </View>
           :  
-            <Postlist>
+            <Postlist verPost={this.state.idHas} cargarHashtag={this.state.data}>
             </Postlist>
           }
           

@@ -45,7 +45,7 @@ const funciones = () =>{
 
 
     const obtenerListaPosts = (idHashtag) =>{
-        let ruta = `${baseURL}/${idHashtag}/recent_media?access_token=${access_token}&user_id=${user_id}&fields=id,media_type,media_url, caption`;
+        let ruta = `${baseURL}/${idHashtag}/recent_media?access_token=${access_token}&user_id=${user_id}&fields=id,media_type,media_url, caption, like_count, comments_count, permalink `;
 
         let promise = new Promise((resolve, reject)=>{
 

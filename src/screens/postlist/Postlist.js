@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View, AsyncStorage, FlatList, Image, TouchableHighlight } from 'react-native'
+import { Text, View, FlatList, Image, TouchableHighlight } from 'react-native'
 import api from '../../services/api/';
 import { Titulo, ContenedorTitulo, ContenedorImagenes, ContenedorTituloMini, ImagePost,ImageIcon } from '../postlist/style';
-import { Icon } from 'react-native-elements';
-import { __values } from 'tslib';
+import Detail from '../detail/Detail';
 
 const numColumns = 3;
 
@@ -13,71 +12,79 @@ export default class Postlist extends Component {
     super(props);
 
     this.state = {
-      idHas: '',
       posts: [],
-      hashtag: ''
+      mustraDetalle: false,
+      detalle:[]
     }
-
-    AsyncStorage.getItem('@resources:idHas').then((valor) => {
-      var array = JSON.parse(valor);
-      this.setState({
-        idHas: array.id,
-        hashtag: array.hashtag
-      });
-      
-    }).catch((error)=> console.log(error));
-
   }
 
-  async traerListaPosts (idHas){
-    const resp = await api.obtenerListaPosts(idHas);
+  async traerListaPosts (){
+    const resp = await api.obtenerListaPosts(this.props.verPost);
     return resp;
   }
 
   cargaPosts = () => {
-    this.traerListaPosts(this.state.idHas).then((valor) => {
+    this.traerListaPosts().then((valor) => {
        this.setState({
           posts: valor.data.filter( x => x.media_type === 'IMAGE')
        })
     }).catch((error)=> console.log(error));
   }
 
-  presionando = (id) =>{
-    console.log('Pasa antes',id)
+  verDetallePosts = (item) =>{
+    this.setState({
+      mustraDetalle: true,
+      detalle: item
+    });
+  }
+
+  atras = () =>{
+    console.log('Dentro de atras');
+      
   }
 
     renderItem = ({ item, index }) => {
       return(
         <TouchableHighlight 
-          onPress={() => this.presionando(item)} >
+          onPress={() => this.verDetallePosts(item)} >
           <ImagePost source={{uri: `${item.media_url}`}} ></ImagePost>
         </TouchableHighlight>
       );
   };
 
   render() {
-    if (this.state.idHas != ''){
-      this.cargaPosts();
-      return (
-        <View>
-          <ContenedorTitulo>
-            <ContenedorTituloMini>
-              <ImageIcon source={require('../../../assets/left-arrow.png')}></ImageIcon>
-              <Titulo>
-                {`#${this.state.hashtag}`}
-              </Titulo>
-            </ContenedorTituloMini>
-          </ContenedorTitulo>
-          <ContenedorImagenes>
-            <FlatList
-              data={this.state.posts}
-              renderItem={this.renderItem}
-              numColumns={numColumns}
-              keyExtractor={(item,index) => item.id}
-            />
-          </ContenedorImagenes>
-        </View>
-      )
+    if (this.props.verPost != ''){
+      if(this.state.mustraDetalle){
+        return(
+          <View>
+            <Detail verDetalle={this.state.detalle}></Detail>
+          </View>
+        );
+      }else{
+        this.cargaPosts();
+        return (
+          <View>
+            <ContenedorTitulo>
+              <TouchableHighlight onPress={()=>this.atras}>
+                <ImageIcon source={require('../../../assets/left-arrow.png')}></ImageIcon>
+              </TouchableHighlight>
+              <ContenedorTituloMini>
+                <Titulo>
+                  {`#${this.props.cargarHashtag}`}
+                </Titulo>
+              </ContenedorTituloMini>
+            </ContenedorTitulo>
+            <ContenedorImagenes>
+              <FlatList
+                data={this.state.posts}
+                renderItem={this.renderItem}
+                numColumns={numColumns}
+                keyExtractor={(item,index) => item.id}
+              />
+            </ContenedorImagenes>
+          </View>
+        )
+      }
     }
     return (
       <View>
