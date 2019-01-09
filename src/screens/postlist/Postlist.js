@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
-import { Text, View, FlatList, Image, TouchableHighlight } from 'react-native'
+import { Text, View, FlatList, TouchableHighlight } from 'react-native'
 import api from '../../services/api/';
-import { Titulo, ContenedorTitulo, ContenedorImagenes, ContenedorTituloMini, ImagePost,ImageIcon } from '../postlist/style';
+import { 
+  Titulo, 
+  ContenedorTitulo, 
+  ContenedorImagenes, 
+  ContenedorTituloMini, 
+  ImagePost,
+  ImageIcon 
+} from '../postlist/style';
 import Detail from '../detail/Detail';
+import PropTypes from 'prop-types';
 
 const numColumns = 3;
 
@@ -18,17 +26,26 @@ export default class Postlist extends Component {
     }
   }
 
+  static get propTypes(){
+    return{
+      children: PropTypes.any,
+      verPost: PropTypes.string,
+      cargarHashtag: PropTypes.string
+    }
+  }
+
   async traerListaPosts (){
     const resp = await api.obtenerListaPosts(this.props.verPost);
     return resp;
   }
 
   cargaPosts = () => {
+    
     this.traerListaPosts().then((valor) => {
        this.setState({
           posts: valor.data.filter( x => x.media_type === 'IMAGE')
        })
-    }).catch((error)=> console.log(error));
+    }).catch((error)=> alert(error));
   }
 
   verDetallePosts = (item) =>{
@@ -39,52 +56,49 @@ export default class Postlist extends Component {
   }
 
   atras = () =>{
-    console.log('Dentro de atras');
-      
+    alert('Hola');
   }
 
-    renderItem = ({ item, index }) => {
+  componentDidMount(){
+    this.cargaPosts();
+  }
+
+  renderItem = ( item ) => {
       return(
         <TouchableHighlight 
           onPress={() => this.verDetallePosts(item)} >
-          <ImagePost source={{uri: `${item.media_url}`}} ></ImagePost>
+          <ImagePost  source={{uri: `${item.item.media_url}`}} ></ImagePost>
         </TouchableHighlight>
       );
   };
 
   render() {
     if (this.props.verPost != ''){
-      if(this.state.mustraDetalle){
-        return(
-          <View>
-            <Detail verDetalle={this.state.detalle}></Detail>
-          </View>
-        );
-      }else{
-        this.cargaPosts();
-        return (
-          <View>
-            <ContenedorTitulo>
-              <TouchableHighlight onPress={()=>this.atras}>
-                <ImageIcon source={require('../../../assets/left-arrow.png')}></ImageIcon>
-              </TouchableHighlight>
+      return(
+        <View>
+          <ContenedorTitulo>
+              <ImageIcon source={require('../../../assets/left-arrow.png')}></ImageIcon>
               <ContenedorTituloMini>
                 <Titulo>
                   {`#${this.props.cargarHashtag}`}
                 </Titulo>
               </ContenedorTituloMini>
             </ContenedorTitulo>
+          {
+            this.state.mustraDetalle === true ? 
+            <Detail verDetalle={this.state.detalle} cargarHashtag={this.props.cargarHashtag}></Detail> 
+            : 
             <ContenedorImagenes>
-              <FlatList
-                data={this.state.posts}
-                renderItem={this.renderItem}
-                numColumns={numColumns}
-                keyExtractor={(item,index) => item.id}
-              />
+              <FlatList 
+                data={this.state.posts} 
+                renderItem={this.renderItem} 
+                numColumns={numColumns} 
+                keyExtractor={(item) => item.id} 
+              /> 
             </ContenedorImagenes>
-          </View>
-        )
-      }
+          }
+        </View>
+      );
     }
     return (
       <View>

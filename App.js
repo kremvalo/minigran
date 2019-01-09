@@ -1,9 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Search from './src/screens/search/Search';
-import Postlist from './src/screens/postlist/Postlist';
-
-
 
 export default class App extends React.Component {
   constructor(){
@@ -17,7 +14,6 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Search></Search>
-        {/* <Postlist></Postlist> */}
       </View>
     );
     

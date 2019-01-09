@@ -10,6 +10,7 @@ export const Titulo = styled.Text`
 export const ContenedorTitulo = styled.View`
     flex: 2;
     margin: -20px;
+    padding: 10px;
     background-color: #7DE2BA; 
     alignItems: center;
     justifyContent: center;
@@ -29,7 +30,6 @@ export const ImageIcon = styled.Image`
     marginLeft: -100px;
 `;
 
-
 export const ContenedorImagenes = styled.View`
     flex:10;
 `;
@@ -39,6 +39,4 @@ export const ImagePost = styled.Image`
     height: 120px;
     margin:5px;
     border-radius: 7px;
-`
-
-
+`;

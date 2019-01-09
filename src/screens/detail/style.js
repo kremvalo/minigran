@@ -1,18 +1,16 @@
 import styled from 'styled-components/native';
 
-
-
 export const Contenedor = styled.View`
-    padding:20px;
-`;          
+    padding:10px;
+`;
 
-export const ContainerButtoninsta =  styled.View`
+export const ContainerButtoninsta = styled.View`
   padding:0px 45px;
-`; 
+`;
 
 export const ContenedorCaption = styled.View`
     padding:10px;
-`; 
+`;
 
 export const ContenedorContadores = styled.View`
     flexDirection: row;
@@ -35,8 +33,7 @@ export const TextNumber = styled.Text`
 `;
 
 export const ImagePost = styled.Image`
-    width:400px; 
-    height:400px;
+    width:380px; 
+    height:380px;
     border-radius:10px;
 `;
-
