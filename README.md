@@ -25,3 +25,7 @@ Pasos para correr la App
 
 ## APP 
 
+![screenshot_20190109-181031_samsung experience home](https://user-images.githubusercontent.com/32576306/50935623-9c08ec80-143a-11e9-9afd-e94b917e781a.jpg)
+![screenshot_20190109-181038_minigran](https://user-images.githubusercontent.com/32576306/50935624-9ca18300-143a-11e9-85eb-ea11575c23a0.jpg)
+![screenshot_20190109-181052_minigran](https://user-images.githubusercontent.com/32576306/50935625-9ca18300-143a-11e9-8518-26df102c3910.jpg)
+![screenshot_20190109-181101_minigran](https://user-images.githubusercontent.com/32576306/50935626-9ca18300-143a-11e9-8bd9-9b51ff5dad36.jpg)
