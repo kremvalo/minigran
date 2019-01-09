@@ -53,6 +53,7 @@ export class Search extends Component {
                 <TextStyled>¡Hola!</TextStyled>
                 <TextInstrucciones>Escriba un #hashtag por el cual quiera ver contenido de instagram</TextInstrucciones>
                 <SearchBoxField
+                  placeholder='Bogota'
                   onChangeText = {(text) => this.setState({ data : text }) }
                   value = {this.state.data}
                 />
