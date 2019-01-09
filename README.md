@@ -23,3 +23,5 @@ Pasos para correr la App
 3. Con el lector qr de la aplicacion en el telefono leer el que genera la app en la terminal o en la pagina de expo
 
 
+## APP 
+
