@@ -11,7 +11,7 @@
     "apisauce": "^1.0.2",
     "babel-preset-airbnb": "^3.2.0",
     "exp": "^57.2.1",
-    "expo": "^32.0.0",
+    "expo": "^49.0.0",
     "lottie-react-native": "^2.5.11",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
