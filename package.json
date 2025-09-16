@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "airbnb-browser-shims": "^3.1.0",
-    "apisauce": "^1.0.2",
+    "apisauce": "^3.0.1",
     "babel-preset-airbnb": "^3.2.0",
     "exp": "^57.2.1",
     "expo": "^32.0.0",
